@@ -1,0 +1,26 @@
+<div class="container mx-auto p-4">
+  <h2 class="mb-4 text-2xl font-bold">My Loans</h2>
+  <div class="space-y-4">
+    @for (loan of loans; track loan.id) {
+    <div class="rounded-lg border bg-white p-4 shadow">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-semibold">Book ID: {{ loan.bookId }}</h3>
+          <p class="text-gray-600">Borrowed: {{ loan.borrowDate | date }}</p>
+          @if (loan.returnDate) {
+          <p class="text-gray-600">Returned: {{ loan.returnDate | date }}</p>
+          }
+        </div>
+        @if (loan.status === 'ACTIVE') {
+        <button
+          (click)="returnBook(loan.id)"
+          class="rounded bg-blue-500 px-4 py-2 text-white"
+        >
+          Return
+        </button>
+        }
+      </div>
+    </div>
+    }
+  </div>
+</div>
