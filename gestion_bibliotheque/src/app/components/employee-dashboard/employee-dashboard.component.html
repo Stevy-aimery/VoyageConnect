@@ -1,0 +1,69 @@
+<h2>Tableau de bord employé</h2>
+
+<h3>Ajouter un nouveau livre</h3>
+<form (ngSubmit)="addBook()">
+  <div class="mb-3">
+    <label for="title" class="form-label">Titre</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      [(ngModel)]="newBook.title"
+      name="title"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Auteur</label>
+    <input
+      type="text"
+      class="form-control"
+      id="author"
+      [(ngModel)]="newBook.author"
+      name="author"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="isbn" class="form-label">ISBN</label>
+    <input
+      type="text"
+      class="form-control"
+      id="isbn"
+      [(ngModel)]="newBook.isbn"
+      name="isbn"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Ajouter le livre</button>
+</form>
+
+<h3 class="mt-4">Historique des emprunts</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Utilisateur</th>
+      <th>Livre</th>
+      <th>Date d'emprunt</th>
+      <th>Date de retour</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let borrowing of borrowings">
+      <td>{{ borrowing.user.name }}</td>
+      <td>{{ borrowing.book.title }}</td>
+      <td>{{ borrowing.borrowDate | date }}</td>
+      <td>{{ borrowing.returnDate | date }}</td>
+      <td>
+        <button
+          *ngIf="!borrowing.returnDate"
+          class="btn btn-sm btn-success"
+          (click)="returnBook(borrowing.id)"
+        >
+          Marquer comme rendu
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,6 @@
+<div *ngIf="book">
+  <h2>{{ book.titre }}</h2>
+  <p><strong>Auteur:</strong> {{ book.auteur }}</p>
+  <p><strong>Édition:</strong> {{ book.edition }}</p>
+  <a routerLink="/books" class="btn btn-secondary">Retour à la liste</a>
+</div>

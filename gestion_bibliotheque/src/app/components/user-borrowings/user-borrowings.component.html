@@ -1,0 +1,19 @@
+<h2>Mes Emprunts</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Date d'emprunt</th>
+      <th>Date de retour prévue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let borrowing of borrowings">
+      <td>{{ borrowing.book.title }}</td>
+      <td>{{ borrowing.book.author }}</td>
+      <td>{{ borrowing.borrowDate | date }}</td>
+      <td>{{ borrowing.dueDate | date }}</td>
+    </tr>
+  </tbody>
+</table>

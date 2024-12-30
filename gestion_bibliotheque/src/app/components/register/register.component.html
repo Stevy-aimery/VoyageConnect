@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">
+          Inscription à la bibliothèque
+        </h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nom"
+              [(ngModel)]="user.nom"
+              name="nom"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="prenom"
+              [(ngModel)]="user.prenom"
+              name="prenom"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Âge</label>
+            <input
+              type="number"
+              class="form-control"
+              id="age"
+              [(ngModel)]="user.age"
+              name="age"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="ecole" class="form-label">École</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ecole"
+              [(ngModel)]="user.ecole"
+              name="ecole"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              [(ngModel)]="user.password"
+              name="password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            S'inscrire
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
