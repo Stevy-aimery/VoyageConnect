@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Skip files such as  :
+Dockerfile
+docker-compose.yml
+
 ### STS ###
 .apt_generated
 .classpath
