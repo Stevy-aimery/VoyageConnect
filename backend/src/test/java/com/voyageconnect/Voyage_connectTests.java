@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest
-class VoyageConnectV0ApplicationTests {
+class Voyage_connectTests {
 
 	@Test
 	void contextLoads() {
