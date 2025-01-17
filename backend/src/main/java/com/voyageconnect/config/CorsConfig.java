@@ -13,8 +13,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Autorise tous les endpoints
-             // .allowedOrigins("https://abcd1234.ngrok.io", "http://localhost:4200") // Liste des origines autorisées
-                        .allowedOrigins("*") // Autorise toutes les origines
+              .allowedOrigins("https://abcd1234.ngrok.io", "http://localhost:4200") // Liste des origines autorisées
+                		//.allowedOriginPatterns("*")// Autorise toutes les origines
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Méthodes HTTP autorisées
                         .allowedHeaders("*") // Tous les en-têtes autorisés
                         .allowCredentials(true) // Autorise les cookies ou sessions

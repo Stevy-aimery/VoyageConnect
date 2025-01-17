@@ -20,19 +20,26 @@ public class AuthService {
     private JwtUtil jwtUtil;
 
     public LoginResponse login(LoginRequest loginRequest) {
-        // Authentification de l'utilisateur
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                loginRequest.getUsername(),
-                loginRequest.getPassword()
-            )
-        );
+        try {
+            System.out.println("🔍 Tentative de connexion avec l'email : " + loginRequest.getEmail());
 
-        // Génère le token JWT
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String token = jwtUtil.generateToken(userDetails.getUsername());
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                    loginRequest.getEmail(),
+                    loginRequest.getPassword()
+                )
+            );
 
-        // Retourne la réponse avec un message et le token
-        return new LoginResponse("Connexion réussie avec succès", token);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String token = jwtUtil.generateToken(userDetails.getUsername());
+
+            System.out.println("✅ Connexion réussie pour : " + userDetails.getUsername());
+            return new LoginResponse("Connexion réussie avec succès", token);
+        } catch (Exception e) {
+            System.out.println("❌ Erreur lors de la connexion : " + e.getMessage());
+            throw new RuntimeException("Email ou mot de passe incorrect");
+        }
     }
+
+
 }
