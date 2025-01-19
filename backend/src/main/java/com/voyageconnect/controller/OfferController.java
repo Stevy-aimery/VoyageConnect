@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/offers")
+@RequestMapping("/api/destinations")
 public class OfferController {
 
     @Autowired
