@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/destinations")
@@ -31,12 +32,12 @@ public class OfferController {
             List<Offer> offers = offerService.searchOffers(destination, startDate, endDate);
             
             if (offers.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("❌ Aucune offre trouvée.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "❌ Aucune offre trouvée."));
             }
             
             return ResponseEntity.ok(offers);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("🚨 Erreur dans la requête : " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "🚨 Erreur dans la requête", "details", e.getMessage()));
         }
     }
 
@@ -50,6 +51,19 @@ public class OfferController {
     }
 
     /**
+     * 🔍 Récupérer une offre par ID
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOfferById(@PathVariable Long id) {
+        try {
+            Offer offer = offerService.getOfferById(id);
+            return ResponseEntity.ok(offer);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "❌ Offre non trouvée avec l'ID : " + id));
+        }
+    }
+
+    /**
      * ➕ Création d'une nouvelle offre (ADMIN uniquement)
      */
     @PostMapping
@@ -59,7 +73,35 @@ public class OfferController {
             Offer createdOffer = offerService.createOffer(offer);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdOffer);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("❌ Données invalides : " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "❌ Données invalides", "details", e.getMessage()));
+        }
+    }
+
+    /**
+     * ✏️ Modifier une offre existante (ADMIN uniquement)
+     */
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateOffer(@PathVariable Long id, @RequestBody Offer offerDetails) {
+        try {
+            Offer updatedOffer = offerService.updateOffer(id, offerDetails);
+            return ResponseEntity.ok(updatedOffer);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "❌ Offre non trouvée avec l'ID : " + id));
+        }
+    }
+
+    /**
+     * 🗑️ Supprimer une offre (ADMIN uniquement)
+     */
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteOffer(@PathVariable Long id) {
+        try {
+            offerService.deleteOffer(id);
+            return ResponseEntity.ok(Map.of("message", "✅ Offre supprimée avec succès"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "❌ Offre non trouvée avec l'ID : " + id));
         }
     }
 }

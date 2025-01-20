@@ -53,6 +53,33 @@ public class OfferService {
     }
 
     /**
+     * ✏️ Mise à jour d'une offre existante.
+     */
+    @Transactional
+    public Offer updateOffer(Long id, Offer offerDetails) {
+        Offer existingOffer = offerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("❌ Offre non trouvée avec l'ID : " + id));
+
+        existingOffer.setDestination(offerDetails.getDestination());
+        existingOffer.setStartDate(offerDetails.getStartDate());
+        existingOffer.setEndDate(offerDetails.getEndDate());
+        existingOffer.setPrice(offerDetails.getPrice());
+
+        return offerRepository.save(existingOffer);
+    }
+
+    /**
+     * 🗑️ Suppression d'une offre par ID.
+     */
+    @Transactional
+    public void deleteOffer(Long id) {
+        if (!offerRepository.existsById(id)) {
+            throw new RuntimeException("❌ Offre non trouvée avec l'ID : " + id);
+        }
+        offerRepository.deleteById(id);
+    }
+
+    /**
      * 📌 Récupération de toutes les destinations distinctes disponibles.
      */
     public List<String> getAllDestinations() {
