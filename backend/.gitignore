@@ -8,6 +8,10 @@ target/
 Dockerfile
 docker-compose.yml
 
+# Skip git files or dir of the frontend such as  :
+git
+git/
+
 ### STS ###
 .apt_generated
 .classpath
