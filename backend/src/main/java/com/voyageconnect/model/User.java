@@ -1,9 +1,8 @@
 package com.voyageconnect.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,14 +22,15 @@ public class User {
     private Long id;
 
     @NotBlank(message = "Le nom d'utilisateur est obligatoire")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 50)
     private String username;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
     @Email(message = "L'adresse email n'est pas valide")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -41,14 +41,13 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    // Assurez-vous d'avoir un getter explicite pour la propriété `password`
-    public String getPassword() {
-        return password;
+    // Méthodes utilitaires pour la gestion des rôles
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
-    // Assurez-vous d'avoir un setter explicite pour la propriété `password`
-    public void setPassword(String password) {
-        this.password = password;
+    public void removeRole(Role role) {
+        this.roles.remove(role);
     }
 
 	public Long getId() {
@@ -65,6 +64,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {

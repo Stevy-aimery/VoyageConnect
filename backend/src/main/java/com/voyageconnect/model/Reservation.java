@@ -18,32 +18,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "offer_id", nullable = false)
-    private Offer offer;
-
-    @Column(nullable = false)
-    private LocalDateTime reservationDate;
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal totalPrice;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
-    private ReservationStatus status;
-
-    public enum ReservationStatus {
-        PENDING,
-        CONFIRMED,
-        CANCELLED
-    }
-
-    // Ajout d'un constructeur personnalisé si nécessaire
+    
     public Reservation(User user, Offer offer, LocalDateTime reservationDate, BigDecimal totalPrice, ReservationStatus status) {
         this.user = user;
         this.offer = offer;
@@ -52,7 +27,7 @@ public class Reservation {
         this.status = status;
     }
 
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -99,4 +74,28 @@ public class Reservation {
 	public void setStatus(ReservationStatus status) {
 		this.status = status;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "offer_id", nullable = false)
+    private Offer offer;
+
+    @Column(nullable = false)
+    private LocalDateTime reservationDate;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private ReservationStatus status;
+
+    public enum ReservationStatus {
+        PENDING,
+        CONFIRMED,
+        CANCELLED
+    }
 }

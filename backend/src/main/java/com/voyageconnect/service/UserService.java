@@ -6,53 +6,80 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
+    
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Enregistre un nouvel utilisateur avec hachage du mot de passe.
+     */
     public User registerUser(User user) {
-        // Vérifiez si le username existe déjà
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("Le nom d'utilisateur est déjà pris. Veuillez en choisir un autre.");
+            throw new RuntimeException("Le nom d'utilisateur est déjà pris.");
         }
-
-        // Vérifiez si l'email existe déjà
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("L'adresse email est déjà utilisée. Veuillez en utiliser une autre.");
+            throw new RuntimeException("L'adresse email est déjà utilisée.");
         }
 
-        // Hachez le mot de passe
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // Sauvegardez l'utilisateur dans la base de données
         return userRepository.save(user);
     }
 
-
     /**
-     * Récupère le mot de passe d'un utilisateur.
-     *
-     * @param user L'utilisateur.
-     * @return Le mot de passe non encodé de l'utilisateur.
+     * Récupère un utilisateur par son ID.
      */
-    public String getPassword(User user) {
-        // Vérification pour s'assurer que l'utilisateur n'est pas null
-        if (user == null) {
-            throw new RuntimeException("User cannot be null");
-        }
-        return user.getPassword();
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+    
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
+    /**
+     * Récupère un utilisateur par son nom d'utilisateur.
+     */
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
+    /**
+     * Récupère tous les utilisateurs.
+     */
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
-	public User getUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Met à jour les informations d'un utilisateur.
+     */
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id).map(user -> {
+            user.setUsername(updatedUser.getUsername());
+            user.setEmail(updatedUser.getEmail());
+            if (!updatedUser.getPassword().isEmpty()) {
+                user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+            }
+            user.setRoles(updatedUser.getRoles());
+            return userRepository.save(user);
+        }).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+    }
+
+    /**
+     * Supprime un utilisateur par son ID.
+     */
+    public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Utilisateur non trouvé");
+        }
+        userRepository.deleteById(id);
+    }
 }
