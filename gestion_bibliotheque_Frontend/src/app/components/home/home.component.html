@@ -1,0 +1,20 @@
+<div class="jumbotron">
+  <h1 class="display-4">Bienvenue à la Bibliothèque</h1>
+  <p class="lead">
+    Découvrez notre vaste collection de livres et gérez vos emprunts en ligne.
+  </p>
+  <hr class="my-4" />
+  <p >
+    Pour Commencez par explorer notre catalogue des livres, Créez un compte ou connectez-vous pour accéder à vos
+    emprunts.
+  </p>
+  <a class="btn btn-success btn-lg" *ngIf="!authService.currentUserValue" routerLink="/login" role="button"
+    >Se Connecter</a
+  >
+  <a class="btn btn-primary btn-lg ms-5" *ngIf="!authService.currentUserValue" routerLink="/register" role="button"
+    >J'ai pas de compte</a
+  >
+  <a class="btn btn-primary btn-lg ms-5" *ngIf="authService.currentUserValue" routerLink="/books" role="button"
+  >Explorez nos Catalogue des livres</a
+>
+</div>

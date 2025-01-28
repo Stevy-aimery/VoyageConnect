@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'books', component: BookListComponent },
   { path: 'books/:id', component: BookDetailsComponent },
-  { path: 'books', component: BookListComponent },
+  
   { path: 'books/:id', component: BookDetailsComponent },
   { path: 'add-book', component: AddBookComponent },
   { path: '', redirectTo: '/books', pathMatch: 'full' },
