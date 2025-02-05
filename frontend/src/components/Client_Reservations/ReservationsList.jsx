@@ -34,9 +34,9 @@ const ReservationsList = () => {
 
     return (
         <div className="ReservationsList">
-            <h2>My Reservations</h2>
+            <h2>Mes Reservations</h2>
             {reservations.length === 0 ? (
-                <p>No reservations found.</p>
+                <p>Aucune reservation trouvee.</p>
             ) : (
                 <table className="reservationTab">
                     <thead>
@@ -45,7 +45,7 @@ const ReservationsList = () => {
                             <th>Date</th>
                             <th>Destination</th>
                             <th>Hotel</th>
-                            <th>Price</th>
+                            <th>Prix</th>
                         </tr>
                     </thead>
                     <tbody>

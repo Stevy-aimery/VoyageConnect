@@ -22,12 +22,12 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 300vh;
-    background-image: url('../../assets/charlesdeluvio-AT5vuPoi8vc-unsplash.jpg');
+    height: 150vh;
+    background-image: url('src\\assets\\Mes_images\\person-traveling-enjoying-their-vacation.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    filter: blur(5px);
+    filter: blur(10px);
     z-index: -1;
 }
   

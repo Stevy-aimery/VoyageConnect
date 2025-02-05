@@ -43,7 +43,7 @@
     background-position: center;
 }
 #offers {
-    background-image: url('../../assets/charlesdeluvio-AT5vuPoi8vc-unsplash.jpg');
+    background-image: url('src\\assets\\Mes_images\\destianation.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -55,7 +55,7 @@
     background-position: center;
 }
 #reservations {
-    background-image: url('../../assets/estee-janssens-zni0zgb3bkQ-unsplash.jpg');
+    background-image: url('src\\assets\\Mes_images\\travel-bags-airport.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -78,6 +78,7 @@
     border-radius: 20px;
     background-color: rgb(220, 232, 241);
     margin-right: 30px;
+    padding-top: 20px;
     height: 18vh;
     padding-inline: 20px;
     color: black;

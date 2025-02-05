@@ -2,6 +2,7 @@ import './App.css'
 import Register from "./components/auth/register/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { HelmetProvider } from "react-helmet-async";
 import Welcome from './components/Welcome/Welcome';
 import Dashboard from './components/Dashboard/Dashboard';
 import AdminDashboard from './components/Dashboard/Admin-dashboard';
@@ -28,9 +29,13 @@ import ClientOffers from './components/Client_Offers/ClientOffers';
 import OneHotelClient from './components/Hotels/OneHotelClient';
 import { UserProvider } from './components/UserProvider/UserProvider';
 import ReservationsList from './components/Client_Reservations/ReservationsList';
-
-
-
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap-icons/font/bootstrap-icons.css";
+// import "aos/dist/aos.css";
+// import "glightbox/dist/css/glightbox.min.css";
+// import "swiper/css";
+// import "swiper/css/bundle";
+// import "./assets/assets/css/main.css"; // Adjust the path based on your folder structure
 
 
 function App() {

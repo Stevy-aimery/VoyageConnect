@@ -65,24 +65,24 @@ const ClientOffers = () => {
   return (
     <div className="ClientOffers">
       <div className="content-container">
-        <h1>Available Offers</h1>
+        <h1>Offres disponibles</h1>
         
         <div className="search-filters">
           <input 
             type="text" 
-            placeholder="Country" 
+            placeholder="Pays" 
             value={searchFilters.country}
             onChange={(e) => setSearchFilters({ ...searchFilters, country: e.target.value })}
           />
           <input 
             type="number" 
-            placeholder="Min Price" 
+            placeholder="Prix minimal" 
             value={searchFilters.minPrice}
             onChange={(e) => setSearchFilters({ ...searchFilters, minPrice: e.target.value })}
           />
           <input 
             type="number" 
-            placeholder="Max Price" 
+            placeholder="Prix maximal" 
             value={searchFilters.maxPrice}
             onChange={(e) => setSearchFilters({ ...searchFilters, maxPrice: e.target.value })}
           />
@@ -94,9 +94,9 @@ const ClientOffers = () => {
             <li className="offer-item" key={offer.id}>
               <h2>{offer.country} - {offer.destinationName} - {offer.offerPrice} <strong>Dh</strong></h2>
               <div className="offer-buttons">
-                <button onClick={() => fetchOfferDetails(offer.id)}>View Details</button>
+                {/* <button onClick={() => fetchOfferDetails(offer.id)}>View Details</button> */}
                 <Link to={`/client-reservation/${offer.id}`}>
-                  <button>Book</button>
+                  <button>Reserver</button>
                 </Link>
               </div>
             </li>

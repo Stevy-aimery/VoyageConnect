@@ -9,9 +9,15 @@ body {
 }
 .log {
     color: #213547;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
 }
 .reg {
     color: #213547;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
 }
 .form {
     display: flex;
@@ -19,9 +25,9 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: white ;
+    background-color:whitesmoke ;
     width: 400px;
-    height: 400px;
+    height: 500px;
     padding: 20px;
     border-radius: 7px ;
     box-shadow: 0 4px 8px rgba(13, 132, 231, 0.4);
@@ -45,22 +51,26 @@ input {
     height: 40px;
     border-radius: 7px;
     padding: 4px;
+    background-color: white;
+    color: black;
 }
 input::placeholder {
-    color: black;
+    color: rgb(164, 145, 145);
 }
 select {
     border: 1px solid #a8ccf1;
     width: 200px;
     height: 30px;
     border-radius: 7px;
+    background-color: whitesmoke;
+    color: black;
 }
 .selecteRole {
     display: flex;
     height: 10px;
-    color: #213547;
+    color: #0c0091;
 }
 .role {
     margin-left: 5px;
-    color: #213547;
+    color: #0c0091;
 }
